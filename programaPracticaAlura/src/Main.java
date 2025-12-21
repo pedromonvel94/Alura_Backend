@@ -1,7 +1,3 @@
-import TemperatureTransformer.ConversionTemperaturas;
-
-import java.util.Scanner;
-
 public class Main {
     public static void main(String[] args) {
         System.out.println("Bienvenid(@) a Screen Match");
