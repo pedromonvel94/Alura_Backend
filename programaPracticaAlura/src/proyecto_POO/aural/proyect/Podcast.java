@@ -2,7 +2,7 @@ package proyecto_POO.aural.proyect;
 
 import java.util.Scanner;
 
-public class Podcast extends Audio {
+public class Podcast extends Audio implements Interacciones{
     Scanner sc = new Scanner(System.in);
 
     private String descripcionPodcast;
@@ -56,6 +56,7 @@ public class Podcast extends Audio {
 
             if(edad >= 18){
                 System.out.println("Bienvenido a: " + getTitulo() + "! Un podcast creado por " + getAutorPodcast() + ", con una duracion de " + getDuracionSegundos() / 60 + " Minutos.");
+                reproducir();
             } else if (edad < 0){
                 System.out.println("Coloca una edad valida");
             }else {
@@ -63,6 +64,17 @@ public class Podcast extends Audio {
             }
         }else {
             System.out.println("Bienvenido a: " + getTitulo() + "! Un podcast creado por " + getAutorPodcast() + ", con una duracion de " + getDuracionSegundos() / 60 + " Minutos.");
+            reproducir();
         }
+    }
+
+    @Override
+    public void play() {
+        soloMayoresEdad();
+    }
+
+    @Override
+    public void pause() {
+        System.out.println("El podcast " + getTitulo() + " de " + getAutorPodcast() + " esta en PAUSA");
     }
 }

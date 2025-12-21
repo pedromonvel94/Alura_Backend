@@ -12,7 +12,7 @@ public class Audio {
         this.duracionSegundos = duracionSegundos;
         this.totalReproducciones = totalReproducciones;
         this.totalMeGusta = 0;
-        this.clasificacion = clasificacion;
+        this.clasificacion = 18;
     }
 
     public Audio() {

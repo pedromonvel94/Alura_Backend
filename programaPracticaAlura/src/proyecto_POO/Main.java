@@ -26,7 +26,12 @@ public class Main {
         );
 
         podcast1.dePagoOGratis();
-        podcast1.soloMayoresEdad();
+        for (int i = 0; i < 3; i++) {
+            podcast1.play();
+            System.out.println(podcast1.getTotalReproducciones());
+            podcast1.pause();
+        }
+
 
         ArrayList<String> colaboradores = new ArrayList<>();
 
@@ -39,6 +44,7 @@ public class Main {
 
         cancion1.play();
         cancion1.pause();
+
 
 
 

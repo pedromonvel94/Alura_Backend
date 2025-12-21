@@ -75,10 +75,12 @@ public class Canciones extends Audio implements Interacciones{
     public void play() {
         if (colaboradores.isEmpty()){
             System.out.println("Escuchando la cancion: " + getTitulo() + " de " + getArtistaPrincipal());
+            reproducir();
         }else {
             System.out.print("Escuchando la cancion: " + getTitulo() + " de " + getArtistaPrincipal() + esColaboracion());
             System.out.println("");
             System.out.println("-------------------------------");
+            reproducir();
 
         }
     }
