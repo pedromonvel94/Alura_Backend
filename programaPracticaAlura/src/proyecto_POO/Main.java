@@ -28,11 +28,19 @@ public class Main {
         podcast1.dePagoOGratis();
         podcast1.soloMayoresEdad();
 
-        Canciones cancion1 = new Canciones();
+        ArrayList<String> colaboradores = new ArrayList<>();
+
+        Canciones cancion1 = new Canciones(
+                "'Dices',", 240, 1000000, "'De la Guetto'", colaboradores, "Reggaeton", 2015
+        );
 
         cancion1.agregarColaborador("Arcangel");
+        cancion1.agregarColaborador("Bad Bunny");
 
-        cancion1.esColaboracion();
+        cancion1.play();
+        cancion1.pause();
+
+
 
 
 

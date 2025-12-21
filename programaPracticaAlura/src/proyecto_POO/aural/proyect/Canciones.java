@@ -2,14 +2,14 @@ package proyecto_POO.aural.proyect;
 
 import java.util.ArrayList;
 
-public class Canciones extends Audio {
+public class Canciones extends Audio implements Interacciones{
     private String artistaPrincipal;
     private ArrayList<String> colaboradores;
     private String genero;
     private int añoLanzamiento;
 
-    public Canciones(String titulo, int duracionSegundos, int totalReproducciones, int clasificacion, String artistaPrincipal, ArrayList<String>  colaboradores, String genero, int añoLanzamiento) {
-        super(titulo, duracionSegundos, totalReproducciones, clasificacion);
+    public Canciones(String titulo, int duracionSegundos, int totalReproducciones, String artistaPrincipal, ArrayList<String>  colaboradores, String genero, int añoLanzamiento) {
+        super(titulo, duracionSegundos, totalReproducciones);
         this.artistaPrincipal = artistaPrincipal;
         this.colaboradores = colaboradores;
         this.genero = genero;
@@ -57,12 +57,34 @@ public class Canciones extends Audio {
         colaboradores.add(colaborador);
     }
 
-    public void esColaboracion(){
-        if (!colaboradores.isEmpty()){
-            System.out.print("Ft. ");
-            for (int i = 0; i < colaboradores.size(); i++){
-                System.out.println(colaboradores.get(i) + " ");
+    public String esColaboracion() {
+        if (colaboradores.isEmpty()) {
+            return "";
+        }
+        StringBuilder stringBuilder = new StringBuilder(" Ft. ");
+        for (int i = 0; i < colaboradores.size(); i++) {
+            stringBuilder.append(colaboradores.get(i));
+            if (i < colaboradores.size() - 1) {
+                stringBuilder.append(", ");
             }
         }
+        return stringBuilder.toString();
+    }
+
+    @Override
+    public void play() {
+        if (colaboradores.isEmpty()){
+            System.out.println("Escuchando la cancion: " + getTitulo() + " de " + getArtistaPrincipal());
+        }else {
+            System.out.print("Escuchando la cancion: " + getTitulo() + " de " + getArtistaPrincipal() + esColaboracion());
+            System.out.println("");
+            System.out.println("-------------------------------");
+
+        }
+    }
+
+    @Override
+    public void pause() {
+        System.out.println("La cancion: " + getTitulo() + " de " + getArtistaPrincipal() + esColaboracion() + " esta en PAUSA");
     }
 }

@@ -9,7 +9,7 @@ public class Podcast extends Audio {
     private String autorPodcast;
 
     public Podcast(String titulo, int duracionSegundos, int totalReproducciones, int clasificacion, String descripcionPodcast, String autorPodcast) {
-        super(titulo, duracionSegundos, totalReproducciones, clasificacion);
+        super(titulo, duracionSegundos, totalReproducciones);
         this.descripcionPodcast = descripcionPodcast;
         this.autorPodcast = autorPodcast;
     }

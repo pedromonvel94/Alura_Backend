@@ -7,7 +7,7 @@ public class Audio {
     private int totalMeGusta;
     private int clasificacion;
 
-    public Audio(String titulo, int duracionSegundos, int totalReproducciones, int clasificacion) {
+    public Audio(String titulo, int duracionSegundos, int totalReproducciones) {
         this.titulo = titulo;
         this.duracionSegundos = duracionSegundos;
         this.totalReproducciones = totalReproducciones;
