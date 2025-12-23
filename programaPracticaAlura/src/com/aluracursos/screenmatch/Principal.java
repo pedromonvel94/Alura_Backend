@@ -6,6 +6,7 @@ import com.aluracursos.screenmatch.modelos.Episodio;
 import com.aluracursos.screenmatch.modelos.Pelicula;
 import com.aluracursos.screenmatch.modelos.Serie;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 
 public class Principal {
@@ -81,9 +82,8 @@ public class Principal {
         System.out.println("La primera pelicula es: " + listaDePeliculas.getFirst().getNombre());
         System.out.println();
 
+        System.out.println(listaDePeliculas); //Al imprimir un ArrayList directamente, Java llama al metodo toString() de cada uno de los objetos que contiene el ArrayList para mostrar su representacion en forma de cadena.
 
-
-
-
+        System.out.println("toString de la pelicula: " + listaDePeliculas.get(2).toString());
     }
 }
