@@ -6,6 +6,8 @@ import com.aluracursos.screenmatch.modelos.Episodio;
 import com.aluracursos.screenmatch.modelos.Pelicula;
 import com.aluracursos.screenmatch.modelos.Serie;
 
+import java.util.ArrayList;
+
 public class Principal {
     public static void main(String[] args) {
         Pelicula miPelicula = new Pelicula(); //Pelicula (Tipo de dato) miPelicula (Nombre de la instancia) = new (Le decimos a java que queremos crear una nueva instancia) Pelicula (De la clase pelicula)
@@ -64,5 +66,24 @@ public class Principal {
         episodio.setTotalVisualizaciones(50);
 
         filtroRecomendacion.filtra(episodio);
+
+        var peliculaDeBruno = new Pelicula(); //En nuevas versiones de Java podemos usar var en lugar del tipo de dato normal, y ya que estamos diciendo que es un nuevo objeto de la clase como hacemos con new Pelicula() se infiere que el tipo de dato es Pelicula.
+        peliculaDeBruno.setNombre("El señor de los anillos");
+        peliculaDeBruno.setDuracionEnMinutos(180);
+        peliculaDeBruno.setFechaDeLanzamiento(2001);
+
+        ArrayList<Pelicula> listaDePeliculas = new ArrayList<>(); //Dentro de los <>, se debe colocar el tipo de dato que va a tener cada uno de los objetos que vamos a almacenar dentro del ArrayList
+        listaDePeliculas.add(miPelicula);
+        listaDePeliculas.add(miPelicula2);
+        listaDePeliculas.add(peliculaDeBruno);
+
+        System.out.println("Tamaño de la lista de peliculas: " + listaDePeliculas.size());
+        System.out.println("La primera pelicula es: " + listaDePeliculas.getFirst().getNombre());
+        System.out.println();
+
+
+
+
+
     }
 }
