@@ -1,4 +1,4 @@
-package com.aluracursos.screenmatch;
+package com.aluracursos.screenmatch.principal;
 
 import com.aluracursos.screenmatch.calculos.CalculadoraDeTiempo;
 import com.aluracursos.screenmatch.calculos.FiltroRecomendacion;
@@ -6,15 +6,11 @@ import com.aluracursos.screenmatch.modelos.Episodio;
 import com.aluracursos.screenmatch.modelos.Pelicula;
 import com.aluracursos.screenmatch.modelos.Serie;
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 
 public class Principal {
     public static void main(String[] args) {
-        Pelicula miPelicula = new Pelicula(); //Pelicula (Tipo de dato) miPelicula (Nombre de la instancia) = new (Le decimos a java que queremos crear una nueva instancia) Pelicula (De la clase pelicula)
-
-        miPelicula.setNombre("Encanto");
-        miPelicula.setFechaDeLanzamiento(2021);
+        Pelicula miPelicula = new Pelicula("Encanto",2021); //Pelicula (Tipo de dato) miPelicula (Nombre de la instancia) = new (Le decimos a java que queremos crear una nueva instancia) Pelicula (De la clase pelicula)
         miPelicula.setIsIncluidoEnElPlan(true);
         miPelicula.setDuracionEnMinutos(130);
 
@@ -29,10 +25,7 @@ public class Principal {
 
         System.out.println("\n" + "----------------------------------------------");
 
-        Serie houseOfTheDragon = new Serie();
-
-        houseOfTheDragon.setNombre("House of the Dragon");
-        houseOfTheDragon.setFechaDeLanzamiento(2022);
+        Serie houseOfTheDragon = new Serie("House of the Dragon", 2022);
         houseOfTheDragon.setIsIncluidoEnElPlan(true);
         houseOfTheDragon.setTemporadas(1);
         houseOfTheDragon.setMinutosPorEpisodio(50);
@@ -41,16 +34,12 @@ public class Principal {
         houseOfTheDragon.muestraFichaTecnica();
 
         CalculadoraDeTiempo calculadora = new CalculadoraDeTiempo();
-
         calculadora.incluye(miPelicula);
         System.out.println(calculadora.getTiempoTotal());
         calculadora.incluye(houseOfTheDragon);
         System.out.println(calculadora.getTiempoTotal());
 
-        Pelicula miPelicula2 = new Pelicula();
-
-        miPelicula2.setNombre("Matrix");
-        miPelicula2.setFechaDeLanzamiento(2001);
+        Pelicula miPelicula2 = new Pelicula("Matrix",2001);
         miPelicula2.setIsIncluidoEnElPlan(true);
         miPelicula2.setDuracionEnMinutos(180);
 
@@ -68,10 +57,8 @@ public class Principal {
 
         filtroRecomendacion.filtra(episodio);
 
-        var peliculaDeBruno = new Pelicula(); //En nuevas versiones de Java podemos usar var en lugar del tipo de dato normal, y ya que estamos diciendo que es un nuevo objeto de la clase como hacemos con new Pelicula() se infiere que el tipo de dato es Pelicula.
-        peliculaDeBruno.setNombre("El señor de los anillos");
+        var peliculaDeBruno = new Pelicula("El señor de los anillos",2001); //En nuevas versiones de Java podemos usar var en lugar del tipo de dato normal, y ya que estamos diciendo que es un nuevo objeto de la clase como hacemos con new Pelicula() se infiere que el tipo de dato es Pelicula.
         peliculaDeBruno.setDuracionEnMinutos(180);
-        peliculaDeBruno.setFechaDeLanzamiento(2001);
 
         ArrayList<Pelicula> listaDePeliculas = new ArrayList<>(); //Dentro de los <>, se debe colocar el tipo de dato que va a tener cada uno de los objetos que vamos a almacenar dentro del ArrayList
         listaDePeliculas.add(miPelicula);

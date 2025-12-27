@@ -8,6 +8,11 @@ public class Titulo {
     private double sumaDeLasEvaluaciones;
     private int totalEvaluaciones;
 
+    public Titulo(String nombre, int fechaDeLanzamiento) {
+        this.nombre = nombre;
+        this.fechaDeLanzamiento = fechaDeLanzamiento;
+    }
+
     public void muestraFichaTecnica(){
         System.out.println("El titulo que quieres ver es: " + nombre);
         System.out.println("Su fecha de lanzamiento fue en: " + fechaDeLanzamiento);
