@@ -1,7 +1,7 @@
-package proyecto_POO;
+package proyecto1_POO;
 
-import proyecto_POO.aural.proyect.Canciones;
-import proyecto_POO.aural.proyect.Podcast;
+import proyecto1_POO.aural.proyect.Canciones;
+import proyecto1_POO.aural.proyect.Podcast;
 
 import java.util.ArrayList;
 

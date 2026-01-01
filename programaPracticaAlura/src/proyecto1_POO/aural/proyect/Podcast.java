@@ -1,4 +1,4 @@
-package proyecto_POO.aural.proyect;
+package proyecto1_POO.aural.proyect;
 
 import java.util.Scanner;
 
