@@ -1,5 +1,7 @@
 package Proyecto2_POO.Buyit;
 
+import java.util.Comparator;
+
 public class Purchase {
     private String itemName;
     private long itemPrice;
@@ -30,9 +32,6 @@ public class Purchase {
 
     @Override
     public String toString() {
-        return "Purchase{" +
-                "itemName='" + itemName + '\'' +
-                ", itemPrice=" + itemPrice +
-                '}';
+        return "Purchase {" + " itemName= '" + itemName + '\'' + ", itemPrice= " + itemPrice + " }";
     }
 }

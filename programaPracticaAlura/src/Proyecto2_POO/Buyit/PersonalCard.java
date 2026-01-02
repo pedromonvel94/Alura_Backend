@@ -22,20 +22,12 @@ public class PersonalCard {
         return cardNumber;
     }
 
-    public void setCardNumber(String cardNumber) {
-        this.cardNumber = cardNumber;
-    }
-
     public String getCardOwner() {
         return cardOwner;
     }
 
-    public void setCardOwner(String cardOwner) {
-        this.cardOwner = cardOwner;
-    }
-
-    public boolean canAfford(){
-        if(balance > 0){
+    public boolean canAfford(long amount){
+        if(this.balance >= amount && this.balance > 0){
             return true;
         } else {
             return false;
