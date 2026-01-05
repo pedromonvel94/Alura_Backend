@@ -18,16 +18,8 @@ public class Purchase {
         return itemName;
     }
 
-    public void setItemName(String itemName) {
-        this.itemName = itemName;
-    }
-
     public long getItemPrice() {
         return itemPrice;
-    }
-
-    public void setItemPrice(long itemPrice) {
-        this.itemPrice = itemPrice;
     }
 
     @Override
