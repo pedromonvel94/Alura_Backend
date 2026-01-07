@@ -1,10 +1,18 @@
 package com.aluracursos.screenmatch.modelos;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Titulo implements Comparable<Titulo> {
 
+    @SerializedName("Title")//Esta es una de las formas de mapear atributos cuando los nombres no coinciden, sin embargo vamos a usar otra forma mas global en la clase que maneja el Gson
     private String nombre;
+
+    @SerializedName("Year")
     private int fechaDeLanzamiento;
+
+    //@SerializedName("Runtime")
     private int duracionEnMinutos;
+
     private boolean incluidoEnElPlan;
     private double sumaDeLasEvaluaciones;
     private int totalEvaluaciones;
@@ -73,5 +81,10 @@ public class Titulo implements Comparable<Titulo> {
     @Override
     public int compareTo(Titulo otroTitulo) {
         return this.getNombre().compareTo(otroTitulo.getNombre());
+    }
+
+    @Override
+    public String toString() {
+        return "Titulo: " + nombre + " (Año de lanzamiendo: " + fechaDeLanzamiento + ")";
     }
 }
