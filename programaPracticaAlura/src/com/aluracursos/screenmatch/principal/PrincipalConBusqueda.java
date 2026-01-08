@@ -1,7 +1,10 @@
 package com.aluracursos.screenmatch.principal;
 
 import com.aluracursos.screenmatch.modelos.Titulo;
+import com.aluracursos.screenmatch.modelos.TituloOMDB;
+import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
 import java.net.URI;
@@ -33,8 +36,13 @@ public class PrincipalConBusqueda {
 
         System.out.println(json);
 
-        Gson gson = new Gson(); //Gson es una libreria de Google que nos permite convertir un JSON en un objeto de Java y viceversa (convertir un objeto de Java en un JSON)
-        Titulo miTitulo = gson.fromJson(json, Titulo.class);
+        Gson gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE).create(); //Gson es una libreria de Google que nos permite convertir un JSON en un objeto de Java y viceversa (convertir un objeto de Java en un JSON)
+
+        TituloOMDB tituloOMDB = gson.fromJson(json, TituloOMDB.class);
+
+        System.out.println(tituloOMDB);
+
+        Titulo miTitulo = new Titulo(tituloOMDB);
         System.out.println(miTitulo);
     }
 

@@ -22,6 +22,12 @@ public class Titulo implements Comparable<Titulo> {
         this.fechaDeLanzamiento = fechaDeLanzamiento;
     }
 
+    public Titulo(TituloOMDB tituloOMDB) {
+        this.nombre = tituloOMDB.title();
+        this.fechaDeLanzamiento = Integer.valueOf(tituloOMDB.year());
+        this.duracionEnMinutos = Integer.valueOf(tituloOMDB.runtime().substring(0, 2));
+    }
+
     public void muestraFichaTecnica(){
         System.out.println("El titulo que quieres ver es: " + nombre);
         System.out.println("Su fecha de lanzamiento fue en: " + fechaDeLanzamiento);
@@ -85,6 +91,6 @@ public class Titulo implements Comparable<Titulo> {
 
     @Override
     public String toString() {
-        return "Titulo: " + nombre + " (Año de lanzamiendo: " + fechaDeLanzamiento + ")";
+        return "Titulo: " + nombre + " Año de lanzamiendo: " + fechaDeLanzamiento + "," + " Minutos de duracion: " + duracionEnMinutos;
     }
 }
