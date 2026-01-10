@@ -22,28 +22,38 @@ public class PrincipalConBusqueda {
         String busqueda = lectura.nextLine();
 
         String direccion = "http://www.omdbapi.com/?apikey=8356d9c1&t=" + busqueda;
+        try{
+            HttpClient client = HttpClient.newHttpClient(); //Para hacer request vamos a usar una arquitectura llamada cliente - servidor, por ende nosotros vamos a ser los clientes que le van a hacer las peticiones al servidor y para eso usamos el HttpClient
+            HttpRequest request = HttpRequest.newBuilder()//Con esta request le decimos al servidor que es lo que queremos obtener de el; adicional a eso podemos ver que esta utilizando un patron de diseño llamado "Builder" el cual identificamos ya que usa el metodo "newBuilder()" y al final cierra con el metodo "build()"; Ahora, que es un patron builder? - basicamente es un patron que nos permite construir algo que puede tener muchas formas, en este caso estamos construyendo una request que solo le vamos a colocar una URI.
+                    .uri(URI.create(direccion)) //Aquí es donde debemos indicar el link que direcciona a nuestra api, ya que a esta es a la que le realizaremos las peticiones
+                    .build();
+            //Algo a tener presente es que nosotros no podemos instanciar la clase HttpRequest directamente con "HttpRequest req = new HttpRequest()" ya que es una clase "abstracta", por ende debemos usar el patron builder para crear una instancia de esta clase.
 
-        HttpClient client = HttpClient.newHttpClient(); //Para hacer request vamos a usar una arquitectura llamada cliente - servidor, por ende nosotros vamos a ser los clientes que le van a hacer las peticiones al servidor y para eso usamos el HttpClient
-        HttpRequest request = HttpRequest.newBuilder()//Con esta request le decimos al servidor que es lo que queremos obtener de el; adicional a eso podemos ver que esta utilizando un patron de diseño llamado "Builder" el cual identificamos ya que usa el metodo "newBuilder()" y al final cierra con el metodo "build()"; Ahora, que es un patron builder? - basicamente es un patron que nos permite construir algo que puede tener muchas formas, en este caso estamos construyendo una request que solo le vamos a colocar una URI.
-                .uri(URI.create(direccion)) //Aquí es donde debemos indicar el link que direcciona a nuestra api, ya que a esta es a la que le realizaremos las peticiones
-                .build();
-        //Algo a tener presente es que nosotros no podemos instanciar la clase HttpRequest directamente con "HttpRequest req = new HttpRequest()" ya que es una clase "abstracta", por ende debemos usar el patron builder para crear una instancia de esta clase.
+            HttpResponse<String> response = client //Con el HttpResponse indicamos que es lo que queremos recibir del servidor, en este caso estamos indicando que queremos recibir un String como respuesta del servidor
+                    .send(request, HttpResponse.BodyHandlers.ofString()); //Como podemos ver está enviando nuestra request (lo que nosotros queremos pedir) y ademas le estamos diciendo que queremos recibir la respuesta como un String usando el BodyHandlers.ofString() (básicamente el BodyHandler lo que hace es interpretar lo que nosotros queremos recibir).
 
-        HttpResponse<String> response = client //Con el HttpResponse indicamos que es lo que queremos recibir del servidor, en este caso estamos indicando que queremos recibir un String como respuesta del servidor
-                .send(request, HttpResponse.BodyHandlers.ofString()); //Como podemos ver está enviando nuestra request (lo que nosotros queremos pedir) y ademas le estamos diciendo que queremos recibir la respuesta como un String usando el BodyHandlers.ofString() (básicamente el BodyHandler lo que hace es interpretar lo que nosotros queremos recibir).
+            String json = response.body();//Con este metodo body() lo que hacemos es obtener el cuerpo de la respuesta que nos envio el servidor (en este caso la informacion de la pelicula Matrix en formato JSON)
 
-        String json = response.body();//Con este metodo body() lo que hacemos es obtener el cuerpo de la respuesta que nos envio el servidor (en este caso la informacion de la pelicula Matrix en formato JSON)
+            System.out.println(json);
 
-        System.out.println(json);
+            Gson gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE).create(); //Gson es una libreria de Google que nos permite convertir un JSON en un objeto de Java y viceversa (convertir un objeto de Java en un JSON)
 
-        Gson gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE).create(); //Gson es una libreria de Google que nos permite convertir un JSON en un objeto de Java y viceversa (convertir un objeto de Java en un JSON)
+            TituloOMDB tituloOMDB = gson.fromJson(json, TituloOMDB.class);
 
-        TituloOMDB tituloOMDB = gson.fromJson(json, TituloOMDB.class);
+            System.out.println(tituloOMDB);
 
-        System.out.println(tituloOMDB);
+            Titulo miTitulo = new Titulo(tituloOMDB);
+            System.out.println("Titulo ya convertido: " + miTitulo);
+        } catch (NumberFormatException e) {
+            System.out.println("Ocurrio un error: ");
+            System.out.println(e.getMessage());
+        } catch (IllegalArgumentException e) {
+            System.out.println("Ocurrio un error en la URI, verifique la direccion: ");
+        } catch(Exception e){
+            System.out.println("Ocurrio un error inesperado: ");
+        }
+        System.out.println("Finalizo la ejecucion del programa.");
 
-        Titulo miTitulo = new Titulo(tituloOMDB);
-        System.out.println(miTitulo);
     }
 
 }
