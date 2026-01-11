@@ -25,7 +25,7 @@ public class Titulo implements Comparable<Titulo> {
     public Titulo(TituloOMDB tituloOMDB) {
         this.nombre = tituloOMDB.title();
         this.fechaDeLanzamiento = Integer.valueOf(tituloOMDB.year());
-        this.duracionEnMinutos = Integer.valueOf(tituloOMDB.runtime().substring(0, 2));
+        this.duracionEnMinutos = Integer.valueOf(tituloOMDB.runtime().substring(0, 3).replace(" ", ""));
     }
 
     public void muestraFichaTecnica(){

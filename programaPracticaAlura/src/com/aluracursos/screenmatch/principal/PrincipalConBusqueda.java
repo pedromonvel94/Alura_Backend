@@ -8,6 +8,7 @@ import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
 import java.net.URI;
+import java.net.URLEncoder;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
@@ -21,7 +22,7 @@ public class PrincipalConBusqueda {
         System.out.println("Escriba el nombre de la pelicula que desea buscar: ");
         String busqueda = lectura.nextLine();
 
-        String direccion = "http://www.omdbapi.com/?apikey=8356d9c1&t=" + busqueda;
+        String direccion = "http://www.omdbapi.com/?apikey=8356d9c1&t=" + URLEncoder.encode(busqueda); //Ojo con esta clase, sirve para convertir los espacios en + de forma automatica, lo que es muy necesario para el funcionamiento de URL´s y funciona mucho mejor que un simple replace
         try{
             HttpClient client = HttpClient.newHttpClient(); //Para hacer request vamos a usar una arquitectura llamada cliente - servidor, por ende nosotros vamos a ser los clientes que le van a hacer las peticiones al servidor y para eso usamos el HttpClient
             HttpRequest request = HttpRequest.newBuilder()//Con esta request le decimos al servidor que es lo que queremos obtener de el; adicional a eso podemos ver que esta utilizando un patron de diseño llamado "Builder" el cual identificamos ya que usa el metodo "newBuilder()" y al final cierra con el metodo "build()"; Ahora, que es un patron builder? - basicamente es un patron que nos permite construir algo que puede tener muchas formas, en este caso estamos construyendo una request que solo le vamos a colocar una URI.
