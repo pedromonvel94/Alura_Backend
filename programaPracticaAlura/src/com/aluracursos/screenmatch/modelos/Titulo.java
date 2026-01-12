@@ -5,10 +5,10 @@ import com.google.gson.annotations.SerializedName;
 
 public class Titulo implements Comparable<Titulo> {
 
-    @SerializedName("Title")//Esta es una de las formas de mapear atributos cuando los nombres no coinciden, sin embargo vamos a usar otra forma mas global en la clase que maneja el Gson
+    //@SerializedName("Title")//Esta es una de las formas de mapear atributos cuando los nombres no coinciden, sin embargo vamos a usar otra forma mas global en la clase que maneja el Gson
     private String nombre;
 
-    @SerializedName("Year")
+    //@SerializedName("Year")
     private int fechaDeLanzamiento;
 
     //@SerializedName("Runtime")
@@ -97,6 +97,6 @@ public class Titulo implements Comparable<Titulo> {
 
     @Override
     public String toString() {
-        return "Titulo: " + nombre + " Año de lanzamiendo: " + fechaDeLanzamiento + "," + " Minutos de duracion: " + duracionEnMinutos;
+        return "(Titulo: " + nombre + " Año de lanzamiendo: " + fechaDeLanzamiento + "," + " Minutos de duracion: " + duracionEnMinutos + ")";
     }
 }
