@@ -46,12 +46,12 @@ public class PrincipalConBusqueda {
 
                 HttpResponse<String> response = client //Con el HttpResponse indicamos que es lo que queremos recibir del servidor, en este caso estamos indicando que queremos recibir un String como respuesta del servidor
                         .send(request, HttpResponse.BodyHandlers.ofString()); //Como podemos ver está enviando nuestra request (lo que nosotros queremos pedir) y ademas le estamos diciendo que queremos recibir la respuesta como un String usando el BodyHandlers.ofString() (básicamente el BodyHandler lo que hace es interpretar lo que nosotros queremos recibir).
-
+ 
                 String json = response.body();//Con este metodo body() lo que hacemos es obtener el cuerpo de la respuesta que nos envio el servidor (en este caso la informacion de la pelicula Matrix en formato JSON)
 
                 System.out.println(json);
 
-                TituloOMDB tituloOMDB = gson.fromJson(json, TituloOMDB.class);
+                TituloOMDB tituloOMDB = gson.fromJson(json, TituloOMDB.class); //En esta parte estamos diciendo, vamos a crear un objeto de clase TituloOMDB, para esto vamos a convertir un json a formato de clase java usando gson.fromJson() y le indico que el cuerpo que deseo convertir es el que tengo en json y lo quiero que tenga el formato de la clase TituloOMDB.class que significa lo mismo que Class<TituloOMDB>
 
                 System.out.println(tituloOMDB);
 
