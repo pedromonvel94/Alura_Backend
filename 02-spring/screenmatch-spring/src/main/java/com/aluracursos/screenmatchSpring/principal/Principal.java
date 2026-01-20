@@ -1,5 +1,6 @@
 package com.aluracursos.screenmatchSpring.principal;
 
+import com.aluracursos.screenmatchSpring.model.DatosEpisodio;
 import com.aluracursos.screenmatchSpring.model.DatosSerie;
 import com.aluracursos.screenmatchSpring.model.DatosTemporada;
 import com.aluracursos.screenmatchSpring.service.ConsumoAPI;
@@ -29,7 +30,7 @@ public class Principal {
 
         System.out.println(datosSerie);
 
-        //busca los datos de todas las temporadas
+        //Busca los datos de todas las temporadas
         List<DatosTemporada> datosTemporadas = new ArrayList<>();
 
         for(int i=1; i <= datosSerie.totalTemporadas(); i++) {
@@ -39,7 +40,19 @@ public class Principal {
             datosTemporadas.add(datosTemporada);
         }
 
-        datosTemporadas.forEach(System.out::println);
-        System.out.println(datosTemporadas.get(2));
+        //datosTemporadas.forEach(System.out::println);
+        //System.out.println(datosTemporadas.get(2));
+        
+        //Mostrar solo el titulo de cada una de las temporadas
+        /*
+        for (int i = 0; i < datosSerie.totalTemporadas(); i++) {
+            List<DatosEpisodio>episodiosTemporada = datosTemporadas.get(i).episodios();
+            for (int j = 0; j < episodiosTemporada.size(); j++) {
+                System.out.println("Episodio: " + episodiosTemporada.get(j).titulo());
+            }
+        }
+        */
+        //El codigo anterior lo podemos hacer con el mismo fucnionamiento pero con el codigo siguiente usando funciones lambda
+        datosTemporadas.forEach(t -> t.episodios().forEach(e -> System.out.println(e.titulo()))); //Esto es una funcin lambda, la primera t es el argumento que recibe la funcion y despues de la flecha encontramos todo lo que se quiera que haga la funcion
     }
 }
