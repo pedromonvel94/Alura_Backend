@@ -53,6 +53,6 @@ public class Principal {
         }
         */
         //El codigo anterior lo podemos hacer con el mismo fucnionamiento pero con el codigo siguiente usando funciones lambda
-        datosTemporadas.forEach(t -> t.episodios().forEach(e -> System.out.println(e.titulo()))); //Esto es una funcin lambda, la primera t es el argumento que recibe la funcion y despues de la flecha encontramos todo lo que se quiera que haga la funcion
+        datosTemporadas.forEach(temporada -> temporada.episodios().forEach(episodio -> System.out.println(episodio.titulo()))); //Esto es una funcin lambda, la primera t es el argumento que recibe la funcion y despues de la flecha encontramos todo lo que se quiera que haga la funcion
     }
 }
