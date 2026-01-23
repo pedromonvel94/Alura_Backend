@@ -3,6 +3,7 @@ package com.aluracursos.screenmatchSpring.principal;
 import com.aluracursos.screenmatchSpring.model.DatosEpisodio;
 import com.aluracursos.screenmatchSpring.model.DatosSerie;
 import com.aluracursos.screenmatchSpring.model.DatosTemporada;
+import com.aluracursos.screenmatchSpring.model.Episodio;
 import com.aluracursos.screenmatchSpring.service.ConsumoAPI;
 import com.aluracursos.screenmatchSpring.service.ConvierteDatos;
 
@@ -71,5 +72,13 @@ public class Principal {
                 .sorted(Comparator.comparing(DatosEpisodio::evaluacion).reversed())//sorted organiza de menor a mayor, sin embargo el metodo Comparator.comparing() necesita un parametro que le indique por cual atributo debe ordenar, por ejemplo si queremos ordenar por duracion seria Comparator.comparing( DatosEpisodio::duracionEnMinutos ) y el reversed lo que hace es que sea ordenada al reves, es decir de mayor a menor
                 .limit(5)
                 .forEach(System.out::println);
+
+        //Convirtiendo los datos a una lista de tipo Episodio
+        List<Episodio> episodios = datosTemporadas.stream()//Creo una lista de episodios llamada episodiosm diciendo que es igual a un stream de datosTemporadas
+                .flatMap(temporada -> temporada.episodios().stream() //Ya que datosTemporadas es una lista de temporadas, y cada temporada tiene una lista de episodios, uso el flatMap para convertir todo en un unico flujo, donde digo que cata temporada me traiga su lista de episodios y convierta esa lista en un stream
+                        .map(datosEpisodio -> new Episodio(temporada.numeroTemporada(),datosEpisodio)))//Con el .map lo que hago es transformar cada elemento de un stream en otro elemento, en este caso estoy diciendo que cada datoEpisodio lo transforme en un nuevo objeto de tipo Episodio, para esto necesito pasarle el numero de temporada (que lo obtengo de temporada.numeroTemporada()) y el propio datosEpisodio
+                .collect(Collectors.toList());//Ahora si lo convierto en una lista mutable
+
+        episodios.forEach(System.out::println);
     }
 }
