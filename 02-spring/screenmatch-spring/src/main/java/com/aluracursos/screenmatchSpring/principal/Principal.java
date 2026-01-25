@@ -8,10 +8,10 @@ import com.aluracursos.screenmatchSpring.service.ConsumoAPI;
 import com.aluracursos.screenmatchSpring.service.ConvierteDatos;
 
 import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Scanner;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Principal {
@@ -80,5 +80,36 @@ public class Principal {
                 .collect(Collectors.toList());//Ahora si lo convierto en una lista mutable
 
         episodios.forEach(System.out::println);
+
+        //Busqueda de pisodios a partir de x año
+
+        System.out.println("A partir de que año");
+        var anioLanzamiento = scanner.nextInt();
+        scanner.nextLine();
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        //Mi opción
+        System.out.println("Esta es la opcion que yo cree para filtrar los resultados mayores a la fecha");
+        episodios.stream()
+                .filter(fecha -> fecha.getFechaDeLanzamiento() != null && fecha.getFechaDeLanzamiento().getYear() >= anioLanzamiento)
+                .forEach(episodio -> System.out.println(
+                        "Temporada " + episodio.getTemporada() +
+                                "Episodio " + episodio.getTitulo() +
+                                "Fecha de Lanzamiento " + episodio.getFechaDeLanzamiento().format(formato)
+                ));
+        System.out.println("--------------------------------------------------------");
+        System.out.println("");
+        //Como lo enseñaron en el curso
+        System.out.println("Esta es la opcion que crearon en la certificacion para filtrar los resultados mayores a la fecha");
+        LocalDate fechaBusqueda = LocalDate.of(anioLanzamiento,1,1);
+        episodios.stream()
+                .filter(episodio -> episodio.getFechaDeLanzamiento() != null && episodio.getFechaDeLanzamiento().isAfter(fechaBusqueda))
+                .forEach(episodio -> System.out.println(
+                        "Temporada " + episodio.getTemporada() +
+                                "Episodio " + episodio.getTitulo() +
+                                "Fecha de Lanzamiento " + episodio.getFechaDeLanzamiento().format(formato)
+                ));
+        System.out.println("--------------------------------------------------------");
+        System.out.println("");
     }
 }
