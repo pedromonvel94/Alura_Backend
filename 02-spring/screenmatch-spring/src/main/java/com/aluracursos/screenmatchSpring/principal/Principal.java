@@ -69,7 +69,11 @@ public class Principal {
         System.out.println("Los 5 mejores episodios son: ");
         datosEpisodios.stream()
                 .filter(episodio -> !episodio.evaluacion().equalsIgnoreCase("N/A") )//Aqui estamos diciendo que queremos filtrar cada episodio cuya evaluacion NO equivalga a N/A, es decir que solo queremos los episodios que si tienen evaluacion
+                .peek(episodio -> System.out.println("Primer filtro (N/A) " + episodio)) //Este stream intermedio nos permite ver en consola lo que hace el stream hasta este punto, es decir que nos mostrara todos los episodios que pasaron el primer filtro
                 .sorted(Comparator.comparing(DatosEpisodio::evaluacion).reversed())//sorted organiza de menor a mayor, sin embargo el metodo Comparator.comparing() necesita un parametro que le indique por cual atributo debe ordenar, por ejemplo si queremos ordenar por duracion seria Comparator.comparing( DatosEpisodio::duracionEnMinutos ) y el reversed lo que hace es que sea ordenada al reves, es decir de mayor a menor
+                .peek(episodio -> System.out.println("Segundo filtro Ordenar de mayor a menor " + episodio))
+                .map(episodio -> episodio.titulo().toUpperCase())
+                .peek(episodio -> System.out.println("Tercer filtro Mayusculas " + episodio))
                 .limit(5)
                 .forEach(System.out::println);
 
@@ -82,7 +86,6 @@ public class Principal {
         episodios.forEach(System.out::println);
 
         //Busqueda de pisodios a partir de x año
-
         System.out.println("A partir de que año");
         var anioLanzamiento = scanner.nextInt();
         scanner.nextLine();
@@ -99,6 +102,7 @@ public class Principal {
                 ));
         System.out.println("--------------------------------------------------------");
         System.out.println("");
+
         //Como lo enseñaron en el curso
         System.out.println("Esta es la opcion que crearon en la certificacion para filtrar los resultados mayores a la fecha");
         LocalDate fechaBusqueda = LocalDate.of(anioLanzamiento,1,1);
@@ -111,5 +115,33 @@ public class Principal {
                 ));
         System.out.println("--------------------------------------------------------");
         System.out.println("");
+
+        //Busca episodios por un pedazo del titulo
+        System.out.println("Escribe titulo del episodios: ");
+        var pedazoTitulo = scanner.nextLine();
+        Optional<Episodio> episodioBuscado = episodios.stream()
+                .filter(episodio -> episodio.getTitulo().toLowerCase().contains(pedazoTitulo.toLowerCase()))
+                .findFirst();
+        if (episodioBuscado.isPresent()){
+            System.out.println("Episodio encontrado: ");
+            System.out.println("Los datos son: " + episodioBuscado.get());
+        } else {
+            System.out.println("No se encontro el episodio");
+        }
+
+        //Calcular la evaluacion promedio por temporada
+        Map<Integer, Double> evaluacionPorTemporada = episodios.stream()
+                .filter(episodio -> episodio.getEvaluacion() > 0.0) //Filtramos los episodios que tienen evaluacion valida
+                .collect(Collectors.groupingBy(Episodio::getTemporada,
+                        Collectors.averagingDouble(Episodio::getEvaluacion)));
+        System.out.println("Evaluacion promedio por temporada: " + evaluacionPorTemporada);
+
+        //Estadisticas de evaluacion de episodios
+        DoubleSummaryStatistics estadisticasEpisodios = episodios.stream()
+                .filter(episodio -> episodio.getEvaluacion() > 0.0)
+                .collect(Collectors.summarizingDouble(Episodio::getEvaluacion));
+        System.out.println("La media de las evaluaciones es: " + estadisticasEpisodios.getAverage());
+        System.out.println("El episodio mejor evaluado es: " + estadisticasEpisodios.getMax());
+        System.out.println("El episodio peor evaluado es: " + estadisticasEpisodios.getMin());
     }
 }
