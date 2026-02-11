@@ -1,6 +1,7 @@
 package com.aluracursos.screenmatchSpring.principal;
 
 import com.aluracursos.screenmatchSpring.model.*;
+import com.aluracursos.screenmatchSpring.repository.SerieRepository;
 import com.aluracursos.screenmatchSpring.service.ConsumoAPI;
 import com.aluracursos.screenmatchSpring.service.ConvierteDatos;
 
@@ -20,6 +21,12 @@ public class Principal {
     private ConvierteDatos conversor = new ConvierteDatos();
 
     private List<DatosSerie> datosSeries = new ArrayList<>();
+    private SerieRepository repositorio;
+
+
+    public Principal(SerieRepository repository) {
+        this.repositorio = repository;
+    }
 
     public void muestraMenu() {
         System.out.println("Bienvenido a ScreenMatch");
@@ -208,7 +215,9 @@ public class Principal {
 
     private void buscarSerieWeb() {
         DatosSerie datos = getDatosSerie();
-        datosSeries.add(datos);
+        Serie serie = new Serie(datos);
+        repositorio.save(serie);
+        //datosSeries.add(datos);
         System.out.println(datos);
     }
 
