@@ -8,8 +8,9 @@ public class ConsultaGemini {
     public static String obtenerTraduccion(String texto) {
         String modelo = "gemini-2.5-flash";
         String prompt = "Traduce el siguiente texto al español: " + texto;
+        String apiKey = System.getenv("GEMINI_APIKEY");
 
-        Client cliente = new Client.Builder().apiKey("AIzaSyCzjXmkuWd8ctJjB1d7yHj6j5-1WSV8YV4").build();
+        Client cliente = new Client.Builder().apiKey(apiKey).build();
 
         try {
             GenerateContentResponse respuesta = cliente.models.generateContent(
